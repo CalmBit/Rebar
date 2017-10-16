@@ -28,7 +28,7 @@
 package com.elytradev.rebar;
 
 import com.elytradev.concrete.network.NetworkContext;
-import com.elytradev.concrete.utilpackets.MessageToast;
+import com.elytradev.concrete.utilpackets.DisplayToastMessage;
 import com.elytradev.rebar.generic.RebarCreativeTab;
 import com.elytradev.rebar.proxy.CommonProxy;
 import com.elytradev.rebar.registry.BlockRegistry;
@@ -90,7 +90,7 @@ public final class Rebar {
     public void preInit(FMLPreInitializationEvent event) {
         PROXY.init();
         NETWORK_CONTEXT = NetworkContext.forChannel("rebar");
-        NETWORK_CONTEXT.register(MessageToast.class);
+        NETWORK_CONTEXT.register(DisplayToastMessage.class);
     }
 
     @Mod.EventHandler

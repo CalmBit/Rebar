@@ -1,0 +1,24 @@
+<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <symbol id="svg_15" viewBox="0 0 8 8" height="8" width="8" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+
+   <metadata id="svg_14">image/svg+xml</metadata>
+   <g transform="translate(0,-300.76665)" id="svg_10">
+    <path fill="none" fill-rule="evenodd" stroke="#424242" stroke-width="1px" id="svg_13" d="m1.5,301.76665l0,5.5l5.5,0"/>
+    <path fill="none" fill-rule="evenodd" stroke="#424242" stroke-width="0.75" stroke-miterlimit="4" d="m3.5,302.76665l0,2.5l2.5,0" id="svg_12"/>
+    <path fill="none" fill-rule="evenodd" stroke="#424242" stroke-width="0.25" stroke-miterlimit="4" id="svg_11" d="m3.5,305.26665l-2,2"/>
+   </g>
+  </symbol>
+ </defs>
+ <metadata id="metadata4534">image/svg+xml</metadata>
+ <g>
+  <title>Layer 1</title>
+  <g transform="rotate(-180 4.339089870452881,3.6608977317810054) " id="layer1">
+   <path fill="none" fill-rule="evenodd" stroke="#511b1b" stroke-width="1px" id="path4484" d="m1.58909,0.910898l0,5.5l5.5,0"/>
+   <path fill="none" fill-rule="evenodd" stroke="#511b1b" stroke-width="0.75" stroke-miterlimit="4" d="m3.58909,1.910898l0,2.5l2.5,0" id="path4486"/>
+   <path fill="none" fill-rule="evenodd" stroke="#511b1b" stroke-width="0.25" stroke-miterlimit="4" id="path4507" d="m3.58909,4.410898l-2,2"/>
+  </g>
+  <use x="0" y="0" transform="matrix(18.70772933959961,0,0,18.70772933959961,0,0) " xlink:href="#svg_15" id="svg_16"/>
+  <g id="svg_17"/>
+ </g>
+</svg>
