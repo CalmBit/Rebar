@@ -1,0 +1,15 @@
+[
+  {
+    "modid": "rebar",
+    "name": "Rebar",
+    "description": "Reinforcing concrete with concrete examples. Maintained by CalmBit.",
+    "version": "1.12.1-0.1.0.0",
+    "mcversion": "1.12.1",
+    "url": "https://github.com/elytra/Rebar",
+    "authorList": ["CalmBit"],
+    "credits": "",
+    "logoFile": "rebar_logo.png",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

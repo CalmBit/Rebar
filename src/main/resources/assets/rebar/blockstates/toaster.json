@@ -1,0 +1,21 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"down": "rebar:blocks/toaster_side",
+			"up": "rebar:blocks/toaster_top",
+			"north": "rebar:blocks/toaster_side",
+			"south": "rebar:blocks/toaster_side",
+			"west": "rebar:blocks/toaster_side",
+			"east": "rebar:blocks/toaster_side"
+		}
+	},
+	"variants": {
+		"normal": {
+			"model": "cube"
+		},
+		"inventory": {
+			"model": "cube"
+		}
+	}
+}
