@@ -2,20 +2,18 @@
 	"forge_marker": 1,
 	"defaults": {
 		"textures": {
-			"down": "rebar:blocks/toaster_side",
-			"up": "rebar:blocks/toaster_top",
-			"north": "rebar:blocks/toaster_side",
-			"south": "rebar:blocks/toaster_side",
-			"west": "rebar:blocks/toaster_side",
-			"east": "rebar:blocks/toaster_side"
+			"top": "rebar:blocks/toaster_top",
+			"front": "rebar:blocks/toaster_front",
+			"side": "rebar:blocks/toaster_side"
 		}
 	},
 	"variants": {
-		"normal": {
-			"model": "cube"
-		},
+		"facing=north": { "model": "orientable" },
+		"facing=south": { "model": "orientable", "y": 180 },
+		"facing=west":  { "model": "orientable", "y": 270 },
+		"facing=east":  { "model": "orientable", "y": 90 },
 		"inventory": {
-			"model": "cube"
+			"model": "orientable"
 		}
 	}
 }
