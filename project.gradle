@@ -18,7 +18,7 @@ ext {
 	forge = '1.12.1-14.22.0.2474'
 	mappings = 'snapshot_20170908'
 
-	enforceLicenseHeaders = false
+	enforceLicenseHeaders = true
 
 	verbose = false
 }

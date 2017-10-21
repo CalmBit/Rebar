@@ -1,3 +1,29 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016-2017:
+ * 	Ethan Brooks (CalmBit),
+ * 	and contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ * of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.elytradev.rebar.block;
 
 import com.elytradev.concrete.utilpackets.DisplayToastMessage;
@@ -15,90 +41,98 @@ import net.minecraft.world.World;
 
 public class BlockToaster extends BlockBase {
 
-    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-    public BlockToaster() {
-        super(Material.IRON, "toaster");
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-    }
+	public BlockToaster() {
+		super(Material.IRON, "toaster");
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+	}
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if(!worldIn.isRemote) {
-            DisplayToastMessage toast = new DisplayToastMessage(Rebar.NETWORK_CONTEXT,
-                    "Toast!", "Toasty.", 5000L, "rebar:textures/gui/toast.png",-5290496, -1, 0, 0);
-            toast.sendTo(playerIn);
-        }
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if(!worldIn.isRemote) {
+			DisplayToastMessage toast = DisplayToastMessage.builder("Toast!")
+					.setSubtitle("Toasty.")
+					.setTiming(5000L)
+					.setTexture("rebar:textures/gui/toast.png")
+					.setTitleColor(-5290496)
+					.setSubtitleColor(-1)
+					.setTextureX(0)
+					.setTextureY(0)
+					.create(Rebar.NETWORK_CONTEXT);
 
-        return true;
-    }
+			toast.sendTo(playerIn);
+		}
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
-    }
+		return true;
+	}
 
-    @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        this.setDefaultFacing(worldIn, pos, state);
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING);
+	}
 
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-    {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    }
+	@Override
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+		this.setDefaultFacing(worldIn, pos, state);
+	}
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        EnumFacing facing = EnumFacing.getFront(meta);
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
 
-        if(facing.getAxis() == EnumFacing.Axis.Y) {
-            facing = EnumFacing.NORTH;
-        }
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing facing = EnumFacing.getFront(meta);
 
-        return this.getDefaultState().withProperty(FACING, facing);
-    }
+		if(facing.getAxis() == EnumFacing.Axis.Y) {
+			facing = EnumFacing.NORTH;
+		}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
-    }
+		return this.getDefaultState().withProperty(FACING, facing);
+	}
 
-    private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
-    {
-        if (!worldIn.isRemote)
-        {
-            IBlockState[] surround = {
-                worldIn.getBlockState(pos.north()),
-                worldIn.getBlockState(pos.south()),
-                worldIn.getBlockState(pos.west()),
-                worldIn.getBlockState(pos.east())
-            };
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getIndex();
+	}
 
-            EnumFacing enumfacing = state.getValue(FACING);
+	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
+	{
+		if (!worldIn.isRemote)
+		{
+			IBlockState[] surround = {
+				worldIn.getBlockState(pos.north()),
+				worldIn.getBlockState(pos.south()),
+				worldIn.getBlockState(pos.west()),
+				worldIn.getBlockState(pos.east())
+			};
 
-            switch(enumfacing) {
-                case NORTH:
-                    if(surround[0].isFullBlock() && !surround[1].isFullBlock())
-                        enumfacing = EnumFacing.SOUTH;
-                    break;
-                case SOUTH:
-                    if(surround[1].isFullBlock() && !surround[0].isFullBlock())
-                        enumfacing = EnumFacing.NORTH;
-                    break;
-                case WEST:
-                    if(surround[2].isFullBlock() && !surround[3].isFullBlock())
-                        enumfacing = EnumFacing.EAST;
-                    break;
-                case EAST:
-                    if(surround[3].isFullBlock() && !surround[2].isFullBlock())
-                        enumfacing = EnumFacing.WEST;
-                    break;
-            }
+			EnumFacing enumfacing = state.getValue(FACING);
 
-            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
-        }
-    }
+			switch(enumfacing) {
+				case NORTH:
+					if(surround[0].isFullBlock() && !surround[1].isFullBlock())
+						enumfacing = EnumFacing.SOUTH;
+					break;
+				case SOUTH:
+					if(surround[1].isFullBlock() && !surround[0].isFullBlock())
+						enumfacing = EnumFacing.NORTH;
+					break;
+				case WEST:
+					if(surround[2].isFullBlock() && !surround[3].isFullBlock())
+						enumfacing = EnumFacing.EAST;
+					break;
+				case EAST:
+					if(surround[3].isFullBlock() && !surround[2].isFullBlock())
+						enumfacing = EnumFacing.WEST;
+					break;
+			}
+
+			worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
+		}
+	}
 
 
 }
