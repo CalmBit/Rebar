@@ -1,4 +1,4 @@
-<img src="https://rawgit.com/elytra/Rebar/1.12.1/doc/emblem.svg" align="right" width="180px"/>
+<img src="https://cdn.jsdelivr.net/gh/elytra/Rebar@1.12.1/doc/emblem.svg" align="right" width="180px"/>
  
 # Rebar
 *Reinforcing Concrete with concrete examples.*
